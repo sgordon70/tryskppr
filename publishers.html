@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Listed on Skppr — Reach People Who Actually Explore</title>
+  <meta name="description" content="Put your site in front of curious, human web explorers. No algorithm. No bidding war. Just real people who click Skip because they want to find something new." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz4KICA8cmVjdCB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCcgcng9JzIyJyBmaWxsPScjNkM2M0ZGJy8+CiAgPHRleHQgeD0nNTAnIHk9JzY1JyBmb250LWZhbWlseT0nQXJpYWwgQmxhY2ssIEFyaWFsJyBmb250LXdlaWdodD0nOTAwJyBmb250LXNpemU9JzQ2JyBmaWxsPSd3aGl0ZScgdGV4dC1hbmNob3I9J21pZGRsZSc+U2s8L3RleHQ+CiAgPGNpcmNsZSBjeD0nNjcnIGN5PSc2OCcgcj0nMTAnIGZpbGw9JyMyRUNDNzEnLz4KPC9zdmc+" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #1A1A2E;
+      --bg2:        #16213E;
+      --purple:     #6C63FF;
+      --purple-d:   #5A52E0;
+      --green:      #2ECC71;
+      --text:       #FFFFFF;
+      --text-sec:   #A0A8C0;
+      --border:     #2A2A4A;
+      --radius-btn: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 14px 28px;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .btn:hover { transform: scale(1.03); }
+    .btn-primary { background: var(--purple); color: #fff; }
+    .btn-primary:hover { box-shadow: 0 0 18px rgba(108,99,255,0.55); }
+    .btn-secondary { background: transparent; color: var(--purple); border: 2px solid var(--purple); }
+    .btn-secondary:hover { box-shadow: 0 0 18px rgba(108,99,255,0.35); }
+    .btn-dark { background: rgba(0,0,0,0.25); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+    .btn-dark:hover { background: rgba(0,0,0,0.4); box-shadow: none; }
+
+    /* ── Logo ── */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-wordmark {
+      font-weight: 700;
+      font-size: 22px;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(26, 26, 46, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+      gap: 16px;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-sec);
+      transition: color 0.15s;
+    }
+    .nav-link:hover { color: var(--text); }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 100px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(108,99,255,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      background: rgba(46,204,113,0.1);
+      border: 1px solid rgba(46,204,113,0.25);
+      border-radius: 999px;
+      padding: 6px 14px;
+    }
+    .hero h1 {
+      font-weight: 700;
+      font-size: clamp(34px, 5.5vw, 52px);
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text-sec);
+      max-width: 580px;
+      margin: 0 auto 36px;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .hero-meta {
+      font-size: 13px;
+      color: var(--text-sec);
+    }
+
+    /* ── Section base ── */
+    section { padding: 80px 24px; }
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-weight: 700;
+      font-size: clamp(26px, 4vw, 36px);
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      color: var(--text-sec);
+      font-size: 16px;
+      max-width: 540px;
+    }
+    .section-header { margin-bottom: 56px; }
+
+    /* ── Who it's for ── */
+    #who {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .who-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+    .who-card:hover { border-color: var(--purple); }
+    .who-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .who-card h3 {
+      font-weight: 700;
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+    .who-card p {
+      color: var(--text-sec);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    /* ── How it's different ── */
+    .diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 820px;
+    }
+    .diff-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .diff-dot {
+      flex-shrink: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      margin-top: 6px;
+    }
+    .diff-item h4 {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+    .diff-item p {
+      color: var(--text-sec);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ── Pricing ── */
+    #pricing {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .plan-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .plan-card:hover {
+      border-color: var(--purple);
+      transform: translateY(-4px);
+    }
+    .plan-card.featured {
+      background: linear-gradient(160deg, #1e1b4b 0%, #16213E 100%);
+      border-color: var(--purple);
+      box-shadow: 0 0 40px rgba(108,99,255,0.2);
+    }
+    .plan-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--green);
+      color: #0e2019;
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin-bottom: 20px;
+    }
+    .plan-badge.purple {
+      background: var(--purple);
+      color: #fff;
+    }
+    .plan-name {
+      font-weight: 700;
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+    .plan-price {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .plan-price span {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text-sec);
+    }
+    .plan-tagline {
+      font-size: 13px;
+      color: var(--text-sec);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .plan-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 28px;
+    }
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-sec);
+    }
+    .check {
+      flex-shrink: 0;
+      color: var(--green);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    /* ── FAQ ── */
+    .faq-list {
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      text-align: left;
+      padding: 20px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-q:hover { color: var(--purple); }
+    .faq-icon {
+      flex-shrink: 0;
+      font-size: 20px;
+      color: var(--text-sec);
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--purple); }
+    .faq-a {
+      color: var(--text-sec);
+      font-size: 15px;
+      line-height: 1.7;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding-bottom: 20px;
+    }
+
+    /* ── CTA band ── */
+    .cta-band {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-d) 100%);
+      border-radius: 20px;
+      padding: 64px 48px;
+      text-align: center;
+      margin: 0 24px 80px;
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .cta-band::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 300px; height: 300px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .cta-band h2 {
+      font-weight: 700;
+      font-size: clamp(26px, 4vw, 36px);
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .cta-band p {
+      font-size: 17px;
+      opacity: 0.85;
+      margin-bottom: 32px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+    .cta-band-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+    }
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-copy { font-size: 13px; color: var(--text-sec); }
+    .footer-email { font-size: 13px; color: var(--text-sec); transition: color 0.15s; }
+    .footer-email:hover { color: var(--purple); }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .who-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
+      .diff-grid { grid-template-columns: 1fr; }
+      .cta-band { padding: 48px 28px; margin: 0 16px 60px; }
+    }
+    @media (max-width: 580px) {
+      .hero { padding: 72px 20px 60px; }
+      .who-grid { grid-template-columns: 1fr; }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .hero-cta .btn { width: 100%; max-width: 320px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .nav-right .nav-link { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .btn, .plan-card, .faq-a, .faq-icon { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="height:36px;width:36px;flex-shrink:0;">
+          <rect width="100" height="100" rx="22" fill="#6C63FF"/>
+          <text x="50" y="65" font-family="Arial Black, Arial" font-weight="900" font-size="46" fill="white" text-anchor="middle">Sk</text>
+          <circle cx="67" cy="68" r="10" fill="#2ECC71"/>
+        </svg>
+        <span class="logo-wordmark">Skppr</span>
+      </a>
+      <div class="nav-right">
+        <a href="index.html" class="nav-link">For Users</a>
+        <a href="#pricing" class="btn btn-primary">Get Listed</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="hero-eyebrow">✦ For site owners & makers</div>
+    <h1>Put your site in front of people<br>who <span>actually want to explore</span></h1>
+    <p class="hero-sub">Skppr users open a new tab and hit Skip because they're curious. They're not searching for something specific — they're open to finding something great. That could be you.</p>
+    <div class="hero-cta">
+      <a href="#pricing" class="btn btn-primary">See Listing Options</a>
+      <a href="index.html" class="btn btn-secondary">Try Skppr First</a>
+    </div>
+    <p class="hero-meta">No bidding wars. No algorithm. Just real humans, skipping through the web.</p>
+  </section>
+
+  <!-- ── Who it's for ── -->
+  <section id="who">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Who this is for</p>
+        <h2 class="section-title">Built for people who built something</h2>
+        <p class="section-sub">If you made something worth discovering, Skppr is the fastest way to get it in front of curious eyes.</p>
+      </div>
+      <div class="who-grid">
+        <div class="who-card">
+          <span class="who-icon">🛠️</span>
+          <h3>Indie Makers</h3>
+          <p>You shipped a side project, a tool, or a niche site. It's good. Nobody knows it exists. Skppr puts it in front of people who are actively looking for something new.</p>
+        </div>
+        <div class="who-card">
+          <span class="who-icon">✍️</span>
+          <h3>Bloggers & Writers</h3>
+          <p>You write about something specific and interesting. Skppr sends you readers who chose your category — not people who stumbled in from a social algorithm.</p>
+        </div>
+        <div class="who-card">
+          <span class="who-icon">🏪</span>
+          <h3>Small Businesses & Studios</h3>
+          <p>You have a real site with something worth seeing. Skppr is a low-cost, low-noise channel to get a fresh audience through your door.</p>
+        </div>
+        <div class="who-card">
+          <span class="who-icon">🎨</span>
+          <h3>Creators & Artists</h3>
+          <p>Portfolio, gallery, music, film — if your work lives on the web and you want people to find it, Skppr is discovery without the hustle.</p>
+        </div>
+        <div class="who-card">
+          <span class="who-icon">📚</span>
+          <h3>Niche Publishers</h3>
+          <p>You cover something specific — retro gaming, brutalist architecture, obscure history. Skppr users are exactly the kind of people who love that.</p>
+        </div>
+        <div class="who-card">
+          <span class="who-icon">🌐</span>
+          <h3>Anyone with a Good URL</h3>
+          <p>If you have a site that deserves to be found and you're tired of shouting into the void, this is the simplest thing you can do today.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How it's different ── -->
+  <section id="different">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Why Skppr</p>
+        <h2 class="section-title">Not an ad network. Not a directory.</h2>
+        <p class="section-sub">Skppr is something older and simpler — a human-curated index of the real web, served to people who asked to be surprised.</p>
+      </div>
+      <div class="diff-grid">
+        <div class="diff-item">
+          <span class="diff-dot"></span>
+          <div>
+            <h4>Intent-driven discovery</h4>
+            <p>Every Skppr user chose their interest categories. When they hit Skip, they want to land somewhere relevant. Your site shows up because it belongs there.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <span class="diff-dot"></span>
+          <div>
+            <h4>No bidding, no auctions</h4>
+            <p>You pay a flat annual fee for your visibility tier. There's no cost-per-click, no quality score, no competitor outbidding you the day before launch.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <span class="diff-dot"></span>
+          <div>
+            <h4>Human-reviewed index</h4>
+            <p>Every site in Skppr is manually reviewed. That keeps the index clean and makes a listing here actually mean something.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <span class="diff-dot"></span>
+          <div>
+            <h4>Flat, predictable cost</h4>
+            <p>You know exactly what you're paying for the year. No surprise charges, no minimum spend, no "your budget ran out at 2pm on Tuesday."</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <span class="diff-dot"></span>
+          <div>
+            <h4>Visitors who are actually curious</h4>
+            <p>Skppr users installed a browser extension specifically to explore the web. That's a different mindset than someone rage-scrolling a feed.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <span class="diff-dot"></span>
+          <div>
+            <h4>Cancel anytime</h4>
+            <p>Annual plans, no lock-in beyond the year. If Skppr doesn't work for your site, you'll know within a few months and won't be stuck.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pricing ── -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Listing Options</p>
+        <h2 class="section-title">Three ways to get found</h2>
+        <p class="section-sub">All tiers include a manual review to make sure your site is a good fit for Skppr users. Listings go live within 3–5 business days.</p>
+      </div>
+      <div class="pricing-grid">
+
+        <!-- Listed -->
+        <div class="plan-card">
+          <p class="plan-name">Listed</p>
+          <p class="plan-price">$199<span>/year</span></p>
+          <p class="plan-tagline">Your site in the rotation. Steady, consistent discovery.</p>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span> Included in standard skip rotation</li>
+            <li><span class="check">✓</span> Listed in up to 2 interest categories</li>
+            <li><span class="check">✓</span> Manual review &amp; approval</li>
+            <li><span class="check">✓</span> Live within 3–5 business days</li>
+            <li><span class="check">✓</span> Dead link monitoring included</li>
+          </ul>
+          <a href="https://buy.stripe.com/6oUdR89pDbPdbK2dDtgw005" class="btn btn-secondary" style="width:100%;">Get Listed — $199/yr</a>
+        </div>
+
+        <!-- Featured -->
+        <div class="plan-card featured">
+          <span class="plan-badge purple">Most Popular</span>
+          <p class="plan-name">Featured</p>
+          <p class="plan-price">$499<span>/year</span></p>
+          <p class="plan-tagline">More visibility, more categories, more skips landing on you.</p>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span> Everything in Listed</li>
+            <li><span class="check">✓</span> <strong style="color:#fff;">2× rotation frequency</strong></li>
+            <li><span class="check">✓</span> Listed in up to 4 interest categories</li>
+            <li><span class="check">✓</span> Priority review (1–2 business days)</li>
+            <li><span class="check">✓</span> Listed as a Featured site in the index</li>
+          </ul>
+          <a href="https://buy.stripe.com/dRmfZg45j5qP15odDtgw006" class="btn btn-primary" style="width:100%;">Get Featured — $499/yr</a>
+        </div>
+
+        <!-- Sponsored -->
+        <div class="plan-card">
+          <span class="plan-badge">Max Visibility</span>
+          <p class="plan-name">Sponsored</p>
+          <p class="plan-price">$999<span>/year</span></p>
+          <p class="plan-tagline">Your site as a full-page moment — every 5th skip, for every user.</p>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span> Everything in Featured</li>
+            <li><span class="check">✓</span> <strong style="color:#fff;">Full-page sponsored overlay</strong> every 5th skip</li>
+            <li><span class="check">✓</span> Shown to all Skppr users, all categories</li>
+            <li><span class="check">✓</span> Same-day review</li>
+            <li><span class="check">✓</span> Direct line to the Skppr team</li>
+          </ul>
+          <a href="https://buy.stripe.com/00w3cudFT4mLdSaczpgw003" class="btn btn-secondary" style="width:100%;">Get Sponsored — $999/yr</a>
+        </div>
+
+      </div>
+
+      <!-- Fine print -->
+      <p style="text-align:center; color:var(--text-sec); font-size:13px; margin-top:32px; max-width:560px; margin-left:auto; margin-right:auto; line-height:1.7;">
+        All listings are subject to manual review. We reserve the right to decline sites that aren't a good fit for Skppr's audience. If your site isn't approved, you'll receive a full refund. Questions? <a href="mailto:scott@blackhookgroup.com" style="color:var(--purple);">Email us.</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">FAQ</p>
+        <h2 class="section-title">Good questions</h2>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How does Skppr decide when to show my site?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Your site is served to users who have selected matching interest categories. Listed sites appear in standard rotation; Featured sites appear roughly twice as often; Sponsored sites appear as a full-page overlay every 5th skip for all users regardless of category.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What kinds of sites won't be approved?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">We decline sites that are under construction, primarily ad-heavy aggregators, scraper farms, or anything that would feel like a bad surprise to a user who just hit Skip. If you built something real, you'll almost certainly be approved. If you're unsure, email us first — we're happy to take a look before you pay.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Can I change my listing tier later?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Yes. You can upgrade at any time by purchasing the higher tier — we'll apply the remaining credit from your current listing. Downgrades take effect at renewal.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How many users does Skppr have?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Skppr launched in June 2026. We're growing, and we'll be transparent with listed partners about our user numbers. We'd rather you get in early at a low price and grow with us than oversell where we are today.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Do you offer refunds?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">If your site isn't approved after review, you'll receive a full refund. Once a listing is live, we don't offer partial refunds — but if something goes wrong on our end (a bug, a miscategory, extended downtime), we'll make it right. Just email us.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What's the difference between Featured and Sponsored?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Featured means your site appears in the normal skip flow — just more often, and across more categories. Sponsored is a different format entirely: a full-page moment that interrupts the skip flow every 5th skip, shown to every Skppr user regardless of what categories they've selected. It's more interruptive, so it works best for sites with broad appeal.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA Band ── -->
+  <div style="padding: 0 0 0 0;">
+    <div class="cta-band container">
+      <h2>Your site deserves to be found.</h2>
+      <p>Join the Skppr index and reach curious humans who are actively looking for something new.</p>
+      <div class="cta-band-btns">
+        <a href="#pricing" class="btn btn-dark">See Listing Options ↑</a>
+        <a href="mailto:scott@blackhookgroup.com" class="btn" style="background:#fff; color:var(--purple);">Ask Us a Question</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="height:28px;width:28px;flex-shrink:0;">
+          <rect width="100" height="100" rx="22" fill="#6C63FF"/>
+          <text x="50" y="65" font-family="Arial Black, Arial" font-weight="900" font-size="46" fill="white" text-anchor="middle">Sk</text>
+          <circle cx="67" cy="68" r="10" fill="#2ECC71"/>
+        </svg>
+        <span class="logo-wordmark" style="font-size:18px;">Skppr</span>
+      </a>
+      <p class="footer-copy">© 2026 Skppr. All rights reserved.</p>
+      <a href="mailto:scott@blackhookgroup.com" class="footer-email">scott@blackhookgroup.com</a>
+    </div>
+  </footer>
+
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      // Open this one if it wasn't already open
+      if (!isOpen) item.classList.add('open');
+    }
+  </script>
+
+</body>
+</html>

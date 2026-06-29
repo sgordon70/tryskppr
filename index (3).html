@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skppr — Skip Through the Real Web</title>
+  <meta name="description" content="Skppr replaces your new tab with a skip button. Land on real, interesting websites — no algorithm, no feed. Like StumbleUpon, but for 2026." />
+
+  <!-- Favicon: embedded SVG icon (replace src with your real PNG base64 when ready) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz4KICA8cmVjdCB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCcgcng9JzIyJyBmaWxsPScjNkM2M0ZGJy8+CiAgPHRleHQgeD0nNTAnIHk9JzY1JyBmb250LWZhbWlseT0nQXJpYWwgQmxhY2ssIEFyaWFsJyBmb250LXdlaWdodD0nOTAwJyBmb250LXNpemU9JzQ2JyBmaWxsPSd3aGl0ZScgdGV4dC1hbmNob3I9J21pZGRsZSc+U2s8L3RleHQ+CiAgPGNpcmNsZSBjeD0nNjcnIGN5PSc2OCcgcj0nMTAnIGZpbGw9JyMyRUNDNzEnLz4KPC9zdmc+" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #1A1A2E;
+      --bg2:       #16213E;
+      --purple:    #6C63FF;
+      --purple-d:  #5A52E0;
+      --green:     #2ECC71;
+      --text:      #FFFFFF;
+      --text-sec:  #A0A8C0;
+      --border:    #2A2A4A;
+      --radius-btn: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Utility ──────────────────────────────────────────── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Buttons ──────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 14px 28px;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: scale(1.03);
+    }
+
+    .btn-primary {
+      background: var(--purple);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 0 18px rgba(108, 99, 255, 0.55);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--purple);
+      border: 2px solid var(--purple);
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 0 18px rgba(108, 99, 255, 0.35);
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--purple);
+    }
+
+    .btn-white:hover {
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+    }
+
+    /* ── Logo ─────────────────────────────────────────────── */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      /* Inline SVG icon placeholder — swap for <img> with your real PNG */
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-icon svg {
+      height: 36px;
+      width: 36px;
+    }
+
+    .logo-wordmark {
+      font-weight: 700;
+      font-size: 22px;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+
+    /* ── Nav ──────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(26, 26, 46, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* ── Hero ─────────────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      padding: 100px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle radial glow behind hero text */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(108,99,255,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      background: rgba(46, 204, 113, 0.1);
+      border: 1px solid rgba(46, 204, 113, 0.25);
+      border-radius: 999px;
+      padding: 6px 14px;
+    }
+
+    .hero h1 {
+      font-weight: 700;
+      font-size: clamp(36px, 6vw, 56px);
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--purple), var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text-sec);
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .hero-meta {
+      font-size: 13px;
+      color: var(--text-sec);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .hero-meta .dot-sep {
+      color: var(--border);
+    }
+
+    /* ── Section base ─────────────────────────────────────── */
+    section {
+      padding: 80px 24px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-weight: 700;
+      font-size: clamp(28px, 4vw, 36px);
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      color: var(--text-sec);
+      font-size: 16px;
+      max-width: 520px;
+    }
+
+    .section-header {
+      margin-bottom: 56px;
+    }
+
+    /* ── How It Works ─────────────────────────────────────── */
+    #how {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    #how .container { max-width: 1080px; margin: 0 auto; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .step {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .step:hover { border-color: var(--purple); }
+
+    .step-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .step-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(108, 99, 255, 0.12);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .step h3 {
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: var(--text-sec);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ── Categories ───────────────────────────────────────── */
+    #categories .container { max-width: 1080px; margin: 0 auto; }
+
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text-sec);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: default;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .pill:hover {
+      border-color: var(--purple);
+      color: var(--text);
+    }
+
+    /* ── Pricing ──────────────────────────────────────────── */
+    #pricing {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    #pricing .container { max-width: 1080px; margin: 0 auto; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .plan-card {
+      border-radius: 20px;
+      padding: 40px;
+      position: relative;
+    }
+
+    .plan-card.free {
+      background: var(--bg);
+      border: 1px solid var(--border);
+    }
+
+    .plan-card.pro {
+      background: linear-gradient(135deg, #6C63FF 0%, #5A52E0 100%);
+      border: none;
+      box-shadow: 0 20px 60px rgba(108, 99, 255, 0.3);
+    }
+
+    .plan-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--green);
+      color: #0e2019;
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin-bottom: 20px;
+    }
+
+    .plan-name {
+      font-weight: 700;
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .plan-price {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .plan-price span {
+      font-size: 16px;
+      font-weight: 400;
+      opacity: 0.75;
+    }
+
+    .plan-price-note {
+      font-size: 13px;
+      opacity: 0.6;
+      margin-bottom: 28px;
+    }
+
+    .plan-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 24px 0;
+    }
+
+    .plan-card.free .plan-divider { background: var(--border); }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .plan-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+    }
+
+    .plan-card.free .plan-features li { color: var(--text-sec); }
+    .plan-card.pro  .plan-features li { color: rgba(255,255,255,0.9); }
+
+    .check {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      font-size: 11px;
+    }
+
+    .plan-card.free .check {
+      background: rgba(46, 204, 113, 0.12);
+      color: var(--green);
+    }
+
+    .plan-card.pro .check {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-sec);
+    }
+
+    .footer-email {
+      font-size: 13px;
+      color: var(--text-sec);
+      transition: color 0.15s;
+    }
+
+    .footer-email:hover { color: var(--purple); }
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero { padding: 72px 20px 60px; }
+
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .plan-card.pro {
+        order: -1;
+      }
+
+      .nav-inner { gap: 12px; }
+
+      .btn { font-size: 14px; padding: 12px 20px; }
+
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .hero-ctas .btn { width: 100%; max-width: 320px; justify-content: center; }
+    }
+
+    /* ── Reduced motion ───────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .btn { transition: none; }
+      .step, .pill { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">
+          <!-- Skppr icon — replace this <svg> with <img src="data:image/png;base64,YOUR_BASE64" height="36"> for your real PNG -->
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" rx="22" fill="#6C63FF"/>
+            <text x="50" y="65" font-family="Arial Black, Arial" font-weight="900" font-size="46" fill="white" text-anchor="middle">Sk</text>
+            <circle cx="67" cy="68" r="10" fill="#2ECC71"/>
+          </svg>
+        </span>
+        <span class="logo-wordmark">Skppr</span>
+      </a>
+      <a href="#install" class="btn btn-primary">Add to Chrome</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────────────────── -->
+  <section class="hero" id="home">
+    <h1>Skip Through<br><span>the Real Web</span></h1>
+    <p class="hero-sub">One tap at a time. Discover real websites hand-picked by humans — no algorithm, no feed, no doom-scrolling.</p>
+    <div class="hero-ctas" id="install">
+      <a href="#" class="btn btn-primary">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="9" stroke="white" stroke-width="1.5"/><path d="M10 5v6M10 11l-2.5-2.5M10 11l2.5-2.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Add to Chrome — It's Free
+      </a>
+      <a href="#" class="btn btn-secondary">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="9" stroke="#6C63FF" stroke-width="1.5"/><path d="M10 5v6M10 11l-2.5-2.5M10 11l2.5-2.5" stroke="#6C63FF" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Add to Firefox
+      </a>
+    </div>
+    <p class="hero-meta">
+      <span>25 free skips per day</span>
+      <span class="dot-sep">·</span>
+      <span>No account required</span>
+    </p>
+  </section>
+
+  <!-- ── How It Works ───────────────────────────────────── -->
+  <section id="how">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">How it works</p>
+        <h2 class="section-title">Three taps to somewhere new</h2>
+        <p class="section-sub">No setup, no sign-in. Just install and start exploring.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">Step 01</span>
+          <div class="step-icon">⚡</div>
+          <h3>Install Skppr</h3>
+          <p>Add it to Chrome or Firefox in seconds. It quietly replaces your new tab page — nothing else changes.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">Step 02</span>
+          <div class="step-icon">🎯</div>
+          <h3>Choose Your Interests</h3>
+          <p>Pick from 26 categories — Tech, Art, Space, Weird, and more. Skppr shows you sites that match your taste.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">Step 03</span>
+          <div class="step-icon">🚀</div>
+          <h3>Start Skipping</h3>
+          <p>Open a new tab. Hit Skip. Land somewhere real — a blog, a project, a deep rabbit hole. Keep going.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Categories ─────────────────────────────────────── -->
+  <section id="categories">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">26 Categories</p>
+        <h2 class="section-title">Find your corner of the web</h2>
+        <p class="section-sub">Toggle any combination. Skppr learns what you like and what to skip.</p>
+      </div>
+      <div class="pill-grid">
+        <span class="pill">Technology</span>
+        <span class="pill">Design</span>
+        <span class="pill">Art</span>
+        <span class="pill">Music</span>
+        <span class="pill">Film</span>
+        <span class="pill">Gaming</span>
+        <span class="pill">Science</span>
+        <span class="pill">Space</span>
+        <span class="pill">Nature</span>
+        <span class="pill">Travel</span>
+        <span class="pill">Food</span>
+        <span class="pill">Sports</span>
+        <span class="pill">Finance</span>
+        <span class="pill">Business</span>
+        <span class="pill">Health</span>
+        <span class="pill">Fitness</span>
+        <span class="pill">History</span>
+        <span class="pill">Literature</span>
+        <span class="pill">Philosophy</span>
+        <span class="pill">Psychology</span>
+        <span class="pill">Architecture</span>
+        <span class="pill">Photography</span>
+        <span class="pill">Fashion</span>
+        <span class="pill">Humor</span>
+        <span class="pill">Weird</span>
+        <span class="pill">News</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pricing ─────────────────────────────────────────── -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Pricing</p>
+        <h2 class="section-title">Free forever. Unlimited for $3/mo.</h2>
+        <p class="section-sub">Start exploring at no cost. Upgrade when you can't stop skipping.</p>
+      </div>
+      <div class="pricing-grid">
+
+        <!-- Free -->
+        <div class="plan-card free">
+          <p class="plan-name">Free</p>
+          <p class="plan-price">$0<span>/mo</span></p>
+          <p class="plan-price-note">No credit card needed</p>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span> 25 skips per day</li>
+            <li><span class="check">✓</span> All 26 interest categories</li>
+            <li><span class="check">✓</span> Like &amp; dislike sites</li>
+            <li><span class="check">✓</span> Save favorites</li>
+          </ul>
+          <a href="#install" class="btn btn-secondary" style="width:100%; justify-content:center;">Get Started Free</a>
+        </div>
+
+        <!-- Pro -->
+        <div class="plan-card pro">
+          <span class="plan-badge">Most Popular</span>
+          <p class="plan-name">Skppr Pro</p>
+
+          <!-- Billing toggle -->
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;margin-top:4px;">
+            <span id="toggle-label-monthly" style="font-size:13px;font-weight:600;color:#fff;">Monthly</span>
+            <button id="billing-toggle" onclick="toggleBilling()" aria-label="Toggle billing period" style="position:relative;width:44px;height:24px;border-radius:999px;border:none;cursor:pointer;background:rgba(255,255,255,0.25);transition:background 0.2s;flex-shrink:0;padding:0;">
+              <span id="toggle-thumb" style="position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform 0.2s;display:block;"></span>
+            </button>
+            <span id="toggle-label-annual" style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);">Annual <span style="background:var(--green);color:#0e2019;font-size:10px;font-weight:700;border-radius:999px;padding:2px 7px;margin-left:4px;">Save 20%</span></span>
+          </div>
+
+          <p class="plan-price" id="pro-price">$3<span>/mo</span></p>
+          <p class="plan-price-note" id="pro-price-note" style="color:rgba(255,255,255,0.6)">Billed monthly · Cancel anytime</p>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="check">✓</span> Everything in Free</li>
+            <li><span class="check">✓</span> <strong>Unlimited skips</strong></li>
+            <li><span class="check">✓</span> Priority new site additions</li>
+            <li><span class="check">✓</span> Early access to new features</li>
+          </ul>
+          <a id="pro-cta" href="https://buy.stripe.com/7sY8wO45jaL98xQ42Tgw000" class="btn btn-white" style="width:100%; justify-content:center;">Get Skppr Pro</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="height:28px;width:28px;">
+            <rect width="100" height="100" rx="22" fill="#6C63FF"/>
+            <text x="50" y="65" font-family="Arial Black, Arial" font-weight="900" font-size="46" fill="white" text-anchor="middle">Sk</text>
+            <circle cx="67" cy="68" r="10" fill="#2ECC71"/>
+          </svg>
+        </span>
+        <span class="logo-wordmark" style="font-size:18px;">Skppr</span>
+      </a>
+      <p class="footer-copy">© 2026 Skppr. All rights reserved.</p>
+      <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+        <a href="publishers.html" style="font-size:13px;color:var(--text-sec);transition:color 0.15s;" onmouseover="this.style.color='#6C63FF'" onmouseout="this.style.color='var(--text-sec)'">Get Listed →</a>
+        <a href="mailto:scott@blackhookgroup.com" class="footer-email">scott@blackhookgroup.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var isAnnual = false;
+    function toggleBilling() {
+      isAnnual = !isAnnual;
+      var thumb = document.getElementById('toggle-thumb');
+      var labelM = document.getElementById('toggle-label-monthly');
+      var labelA = document.getElementById('toggle-label-annual');
+      var price  = document.getElementById('pro-price');
+      var note   = document.getElementById('pro-price-note');
+      var cta    = document.getElementById('pro-cta');
+
+      if (isAnnual) {
+        thumb.style.transform = 'translateX(20px)';
+        labelM.style.color = 'rgba(255,255,255,0.5)';
+        labelA.style.color = '#fff';
+        price.innerHTML = '$29<span>/yr</span>';
+        note.textContent = 'Billed annually — that's $2.42/mo · Cancel anytime';
+        cta.href = 'https://buy.stripe.com/4gM14mfO1bPd5lEeHxgw004';
+        cta.textContent = 'Get Skppr Pro — Annual';
+      } else {
+        thumb.style.transform = 'translateX(0)';
+        labelM.style.color = '#fff';
+        labelA.style.color = 'rgba(255,255,255,0.5)';
+        price.innerHTML = '$3<span>/mo</span>';
+        note.textContent = 'Billed monthly · Cancel anytime';
+        cta.href = 'https://buy.stripe.com/7sY8wO45jaL98xQ42Tgw000';
+        cta.textContent = 'Get Skppr Pro';
+      }
+    }
+  </script>
+</body>
+</html>
