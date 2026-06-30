@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skppr Admin</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f17;
+      --bg2: #1a1a2e;
+      --purple: #6C63FF;
+      --green: #2ECC71;
+      --red: #e74c3c;
+      --text: #fff;
+      --text-sec: #A0A8C0;
+      --border: #2A2A4A;
+    }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* Login */
+    #loginScreen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .login-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+    .login-box h1 { font-size: 22px; margin-bottom: 8px; }
+    .login-box p { color: var(--text-sec); font-size: 14px; margin-bottom: 24px; }
+    .login-box input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 15px;
+      margin-bottom: 12px;
+      outline: none;
+    }
+    .login-box input:focus { border-color: var(--purple); }
+
+    /* Main */
+    #mainScreen { display: none; padding: 32px 24px; max-width: 1000px; margin: 0 auto; }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .header h1 { font-size: 22px; }
+    .header span { font-size: 13px; color: var(--text-sec); }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .filter-btn {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text-sec);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      border-color: var(--purple);
+      color: var(--text);
+    }
+
+    .submission {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+    .submission:hover { border-color: #3a3a6a; }
+    .submission.approved { border-color: rgba(46,204,113,0.3); }
+    .submission.denied { opacity: 0.5; }
+
+    .sub-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .sub-name { font-weight: 700; font-size: 17px; margin-bottom: 4px; }
+    .sub-url { color: var(--purple); font-size: 14px; }
+    .sub-url a { color: var(--purple); }
+
+    .sub-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .tag {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text-sec);
+    }
+    .tag.tier-standard { border-color: rgba(108,99,255,0.4); color: #9d96ff; }
+    .tag.tier-spotlight { border-color: rgba(46,204,113,0.4); color: var(--green); }
+    .tag.tier-takeover { border-color: rgba(231,76,60,0.4); color: #e74c3c; }
+    .tag.status-pending { border-color: rgba(255,165,0,0.4); color: orange; }
+    .tag.status-approved { border-color: rgba(46,204,113,0.4); color: var(--green); }
+    .tag.status-denied { border-color: rgba(231,76,60,0.4); color: #e74c3c; }
+
+    .sub-desc {
+      font-size: 14px;
+      color: var(--text-sec);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .sub-contact {
+      font-size: 13px;
+      color: var(--text-sec);
+      margin-bottom: 16px;
+    }
+    .sub-contact a { color: var(--purple); }
+
+    .sub-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.15s;
+      font-family: system-ui, sans-serif;
+    }
+    .btn:hover { opacity: 0.85; transform: scale(1.02); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .btn-approve { background: var(--green); color: #0e2019; }
+    .btn-deny { background: rgba(231,76,60,0.15); color: #e74c3c; border: 1px solid rgba(231,76,60,0.3); }
+    .btn-view { background: rgba(108,99,255,0.15); color: var(--purple); border: 1px solid rgba(108,99,255,0.3); }
+    .btn-login { background: var(--purple); color: #fff; width: 100%; justify-content: center; padding: 13px; border-radius: 10px; font-size: 15px; }
+
+    .invoice-link {
+      font-size: 13px;
+      color: var(--green);
+      margin-top: 8px;
+      display: block;
+    }
+
+    .empty { text-align: center; padding: 60px 0; color: var(--text-sec); font-size: 15px; }
+    .loading { text-align: center; padding: 60px 0; color: var(--text-sec); }
+
+    .date { font-size: 12px; color: var(--text-sec); }
+  </style>
+</head>
+<body>
+
+<!-- Login -->
+<div id="loginScreen">
+  <div class="login-box">
+    <h1>🔐 Skppr Admin</h1>
+    <p>Publisher submission review</p>
+    <input type="password" id="passwordInput" placeholder="Admin password" />
+    <button class="btn btn-login" onclick="login()">Sign In</button>
+    <p id="loginError" style="color:#e74c3c;font-size:13px;margin-top:12px;display:none;">Incorrect password.</p>
+  </div>
+</div>
+
+<!-- Main -->
+<div id="mainScreen">
+  <div class="header">
+    <h1>📋 Publisher Submissions</h1>
+    <span id="lastUpdated"></span>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+    <button class="filter-btn" onclick="setFilter('pending', this)">Pending</button>
+    <button class="filter-btn" onclick="setFilter('approved', this)">Approved</button>
+    <button class="filter-btn" onclick="setFilter('denied', this)">Denied</button>
+  </div>
+
+  <div id="submissionsList"><div class="loading">Loading submissions...</div></div>
+</div>
+
+<script>
+  const WORKER = 'https://skppr-api.sgordon70.workers.dev';
+  let adminKey = '';
+  let allSubmissions = [];
+  let currentFilter = 'all';
+
+  function login() {
+    const pw = document.getElementById('passwordInput').value.trim();
+    if (!pw) return;
+    adminKey = pw;
+    loadSubmissions();
+  }
+
+  document.getElementById('passwordInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') login();
+  });
+
+  async function loadSubmissions() {
+    const res = await fetch(`${WORKER}/admin/submissions`, {
+      headers: { 'x-admin-key': adminKey }
+    });
+    if (res.status === 401) {
+      document.getElementById('loginError').style.display = 'block';
+      adminKey = '';
+      return;
+    }
+    const data = await res.json();
+    allSubmissions = data;
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('mainScreen').style.display = 'block';
+    document.getElementById('lastUpdated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+    renderSubmissions();
+  }
+
+  function setFilter(filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderSubmissions();
+  }
+
+  function renderSubmissions() {
+    const list = document.getElementById('submissionsList');
+    const filtered = currentFilter === 'all'
+      ? allSubmissions
+      : allSubmissions.filter(s => s.status === currentFilter);
+
+    if (filtered.length === 0) {
+      list.innerHTML = '<div class="empty">No submissions found.</div>';
+      return;
+    }
+
+    list.innerHTML = filtered.map(s => `
+      <div class="submission ${s.status}" id="sub-${s.id}">
+        <div class="sub-header">
+          <div>
+            <div class="sub-name">${esc(s.site_name || 'Unnamed Site')}</div>
+            <div class="sub-url"><a href="${esc(s.url)}" target="_blank">${esc(s.url)}</a></div>
+          </div>
+          <div class="date">${new Date(s.created_at).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'})}</div>
+        </div>
+        <div class="sub-meta">
+          <span class="tag tier-${(s.tier||'').toLowerCase()}">${esc(s.tier || '—')}</span>
+          <span class="tag">${esc(s.category || '—')}</span>
+          <span class="tag status-${s.status}">${s.status}</span>
+        </div>
+        ${s.description ? `<div class="sub-desc">${esc(s.description)}</div>` : ''}
+        <div class="sub-contact">
+          <strong>${esc(s.name)}</strong> — <a href="mailto:${esc(s.email)}">${esc(s.email)}</a>
+        </div>
+        <div class="sub-actions">
+          ${s.status === 'pending' ? `
+            <button class="btn btn-approve" onclick="approve('${s.id}', '${esc(s.email)}', '${esc(s.name)}', '${esc(s.tier)}')">✓ Approve & Invoice</button>
+            <button class="btn btn-deny" onclick="deny('${s.id}')">✕ Deny</button>
+          ` : ''}
+          <a href="${esc(s.url)}" target="_blank" class="btn btn-view">↗ Visit Site</a>
+          ${s.stripe_invoice_url ? `<a href="${esc(s.stripe_invoice_url)}" target="_blank" class="btn btn-view">📄 View Invoice</a>` : ''}
+        </div>
+        ${s.stripe_invoice_url ? `<a href="${esc(s.stripe_invoice_url)}" target="_blank" class="invoice-link">Invoice sent ✓ — click to view in Stripe</a>` : ''}
+      </div>
+    `).join('');
+  }
+
+  async function approve(id, email, name, tier) {
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = 'Sending invoice...';
+    const res = await fetch(`${WORKER}/admin/approve`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
+      body: JSON.stringify({ id, email, name, tier })
+    });
+    const data = await res.json();
+    if (data.success) {
+      await loadSubmissions();
+    } else {
+      btn.disabled = false;
+      btn.textContent = '✓ Approve & Invoice';
+      alert('Something went wrong. Check Stripe and Supabase.');
+    }
+  }
+
+  async function deny(id) {
+    if (!confirm('Deny this submission?')) return;
+    await fetch(`${WORKER}/admin/deny`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
+      body: JSON.stringify({ id })
+    });
+    await loadSubmissions();
+  }
+
+  function esc(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+</script>
+
+</body>
+</html>
