@@ -46,7 +46,6 @@
       padding: 0 24px;
     }
 
-    /* ── Buttons ── */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -71,7 +70,6 @@
     .btn-dark { background: rgba(0,0,0,0.25); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
     .btn-dark:hover { background: rgba(0,0,0,0.4); box-shadow: none; }
 
-    /* ── Logo ── */
     .logo {
       display: flex;
       align-items: center;
@@ -85,7 +83,6 @@
       letter-spacing: -0.3px;
     }
 
-    /* ── Nav ── */
     nav {
       position: sticky;
       top: 0;
@@ -117,7 +114,6 @@
     }
     .nav-link:hover { color: var(--text); }
 
-    /* ── Hero ── */
     .hero {
       text-align: center;
       padding: 100px 24px 80px;
@@ -185,7 +181,6 @@
       color: var(--text-sec);
     }
 
-    /* ── Section base ── */
     section { padding: 80px 24px; }
     .section-label {
       font-size: 12px;
@@ -208,7 +203,6 @@
     }
     .section-header { margin-bottom: 56px; }
 
-    /* ── Who it's for ── */
     #who {
       background: var(--bg2);
       border-top: 1px solid var(--border);
@@ -243,7 +237,6 @@
       line-height: 1.65;
     }
 
-    /* ── How it's different ── */
     .diff-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -274,7 +267,6 @@
       line-height: 1.6;
     }
 
-    /* ── Pricing ── */
     #pricing {
       background: var(--bg2);
       border-top: 1px solid var(--border);
@@ -368,7 +360,6 @@
       margin-top: 2px;
     }
 
-    /* ── FAQ ── */
     .faq-list {
       max-width: 680px;
       display: flex;
@@ -416,7 +407,6 @@
       padding-bottom: 20px;
     }
 
-    /* ── CTA band ── */
     .cta-band {
       background: linear-gradient(135deg, var(--purple) 0%, var(--purple-d) 100%);
       border-radius: 20px;
@@ -468,7 +458,6 @@
       position: relative;
     }
 
-    /* ── Footer ── */
     footer {
       border-top: 1px solid var(--border);
       padding: 32px 24px;
@@ -486,7 +475,6 @@
     .footer-email { font-size: 13px; color: var(--text-sec); transition: color 0.15s; }
     .footer-email:hover { color: var(--purple); }
 
-    /* ── Responsive ── */
     @media (max-width: 860px) {
       .who-grid { grid-template-columns: 1fr 1fr; }
       .pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
@@ -508,7 +496,7 @@
 </head>
 <body>
 
-  <!-- ── Nav ── -->
+  <!-- Nav -->
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="logo">
@@ -521,24 +509,24 @@
       </a>
       <div class="nav-right">
         <a href="index.html" class="nav-link">For Users</a>
-        <a href="#pricing" class="btn btn-primary">Get Listed</a>
+        <a href="#apply" class="btn btn-primary">Get Listed</a>
       </div>
     </div>
   </nav>
 
-  <!-- ── Hero ── -->
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-eyebrow">✦ For site owners & makers</div>
     <h1>Put your site in front of people<br>who <span>actually want to explore</span></h1>
     <p class="hero-sub">Skppr users open a new tab and hit Skip because they're curious. They're not searching for something specific — they're open to finding something great. That could be you.</p>
     <div class="hero-cta">
-      <a href="#pricing" class="btn btn-primary">See Listing Options</a>
+      <a href="#apply" class="btn btn-primary">Apply to Get Listed</a>
       <a href="index.html" class="btn btn-secondary">Try Skppr First</a>
     </div>
     <p class="hero-meta">No bidding wars. No algorithm. Just real humans, skipping through the web.</p>
   </section>
 
-  <!-- ── Who it's for ── -->
+  <!-- Who it's for -->
   <section id="who">
     <div class="container">
       <div class="section-header">
@@ -581,7 +569,7 @@
     </div>
   </section>
 
-  <!-- ── How it's different ── -->
+  <!-- How it's different -->
   <section id="different">
     <div class="container">
       <div class="section-header">
@@ -636,7 +624,7 @@
     </div>
   </section>
 
-  <!-- ── Pricing ── -->
+  <!-- Pricing -->
   <section id="pricing">
     <div class="container">
       <div class="section-header">
@@ -646,9 +634,9 @@
       </div>
       <div class="pricing-grid">
 
-        <!-- Listed -->
+        <!-- Standard -->
         <div class="plan-card">
-          <p class="plan-name">Listed</p>
+          <p class="plan-name">Standard</p>
           <p class="plan-price">$199<span>/year</span></p>
           <p class="plan-tagline">Your site in the rotation. Steady, consistent discovery.</p>
           <div class="plan-divider"></div>
@@ -659,52 +647,52 @@
             <li><span class="check">✓</span> Live within 3–5 business days</li>
             <li><span class="check">✓</span> Dead link monitoring included</li>
           </ul>
-          <a href="https://buy.stripe.com/6oUdR89pDbPdbK2dDtgw005" class="btn btn-secondary" style="width:100%;">Get Listed — $199/yr</a>
+          <a href="#apply" class="btn btn-secondary" style="width:100%;">Apply — $199/yr</a>
         </div>
 
-        <!-- Featured -->
+        <!-- Spotlight -->
         <div class="plan-card featured">
           <span class="plan-badge purple">Most Popular</span>
-          <p class="plan-name">Featured</p>
+          <p class="plan-name">Spotlight</p>
           <p class="plan-price">$499<span>/year</span></p>
           <p class="plan-tagline">More visibility, more categories, more skips landing on you.</p>
           <div class="plan-divider"></div>
           <ul class="plan-features">
-            <li><span class="check">✓</span> Everything in Listed</li>
+            <li><span class="check">✓</span> Everything in Standard</li>
             <li><span class="check">✓</span> <strong style="color:#fff;">2× rotation frequency</strong></li>
             <li><span class="check">✓</span> Listed in up to 4 interest categories</li>
             <li><span class="check">✓</span> Priority review (1–2 business days)</li>
-            <li><span class="check">✓</span> Listed as a Featured site in the index</li>
+            <li><span class="check">✓</span> Listed as a Spotlight site in the index</li>
           </ul>
-          <a href="https://buy.stripe.com/dRmfZg45j5qP15odDtgw006" class="btn btn-primary" style="width:100%;">Get Featured — $499/yr</a>
+          <a href="#apply" class="btn btn-primary" style="width:100%;">Apply — $499/yr</a>
         </div>
 
-        <!-- Sponsored -->
+        <!-- Takeover -->
         <div class="plan-card">
           <span class="plan-badge">Max Visibility</span>
-          <p class="plan-name">Sponsored</p>
+          <p class="plan-name">Takeover</p>
           <p class="plan-price">$999<span>/year</span></p>
           <p class="plan-tagline">Your site as a full-page moment — every 5th skip, for every user.</p>
           <div class="plan-divider"></div>
           <ul class="plan-features">
-            <li><span class="check">✓</span> Everything in Featured</li>
+            <li><span class="check">✓</span> Everything in Spotlight</li>
             <li><span class="check">✓</span> <strong style="color:#fff;">Full-page sponsored overlay</strong> every 5th skip</li>
             <li><span class="check">✓</span> Shown to all Skppr users, all categories</li>
             <li><span class="check">✓</span> Same-day review</li>
             <li><span class="check">✓</span> Direct line to the Skppr team</li>
           </ul>
-          <a href="https://buy.stripe.com/00w3cudFT4mLdSaczpgw003" class="btn btn-secondary" style="width:100%;">Get Sponsored — $999/yr</a>
+          <a href="#apply" class="btn btn-secondary" style="width:100%;">Apply — $999/yr</a>
         </div>
 
       </div>
 
-      <!-- Fine print -->
       <p style="text-align:center; color:var(--text-sec); font-size:13px; margin-top:32px; max-width:560px; margin-left:auto; margin-right:auto; line-height:1.7;">
-        All listings are subject to manual review. We reserve the right to decline sites that aren't a good fit for Skppr's audience. If your site isn't approved, you'll receive a full refund. Questions? <a href="mailto:hello@tryskppr.com" style="color:var(--purple);">Email us.</a>
+        All listings are subject to manual review. We reserve the right to decline sites that aren't a good fit for Skppr's audience. If your site isn't approved, you won't be charged. Questions? <a href="mailto:hello@tryskppr.com" style="color:var(--purple);">Email us.</a>
       </p>
     </div>
   </section>
-<!-- ── Get Listed Form ── -->
+
+  <!-- Apply Form -->
   <section id="apply">
     <div class="container" style="max-width:680px;">
       <div class="section-header">
@@ -765,7 +753,8 @@
       </div>
     </div>
   </section>
-  <!-- ── FAQ ── -->
+
+  <!-- FAQ -->
   <section id="faq">
     <div class="container">
       <div class="section-header">
@@ -773,15 +762,13 @@
         <h2 class="section-title">Good questions</h2>
       </div>
       <div class="faq-list">
-
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
             How does Skppr decide when to show my site?
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-a">Your site is served to users who have selected matching interest categories. Listed sites appear in standard rotation; Featured sites appear roughly twice as often; Sponsored sites appear as a full-page overlay every 5th skip for all users regardless of category.</div>
+          <div class="faq-a">Your site is served to users who have selected matching interest categories. Standard sites appear in standard rotation; Spotlight sites appear roughly twice as often; Takeover sites appear as a full-page overlay every 5th skip for all users regardless of category.</div>
         </div>
-
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
             What kinds of sites won't be approved?
@@ -789,7 +776,6 @@
           </button>
           <div class="faq-a">We decline sites that are under construction, primarily ad-heavy aggregators, scraper farms, or anything that would feel like a bad surprise to a user who just hit Skip. If you built something real, you'll almost certainly be approved. If you're unsure, email us first — we're happy to take a look before you pay.</div>
         </div>
-
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
             Can I change my listing tier later?
@@ -797,7 +783,6 @@
           </button>
           <div class="faq-a">Yes. You can upgrade at any time by purchasing the higher tier — we'll apply the remaining credit from your current listing. Downgrades take effect at renewal.</div>
         </div>
-
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
             How many users does Skppr have?
@@ -805,40 +790,37 @@
           </button>
           <div class="faq-a">Skppr launched in June 2026. We're growing, and we'll be transparent with listed partners about our user numbers. We'd rather you get in early at a low price and grow with us than oversell where we are today.</div>
         </div>
-
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
             Do you offer refunds?
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-a">If your site isn't approved after review, you'll receive a full refund. Once a listing is live, we don't offer partial refunds — but if something goes wrong on our end (a bug, a miscategory, extended downtime), we'll make it right. Just email us.</div>
+          <div class="faq-a">If your site isn't approved after review, you won't be charged. Once a listing is live, we don't offer partial refunds — but if something goes wrong on our end, we'll make it right. Just email us.</div>
         </div>
-
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
-            What's the difference between Featured and Sponsored?
+            What's the difference between Spotlight and Takeover?
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-a">Featured means your site appears in the normal skip flow — just more often, and across more categories. Sponsored is a different format entirely: a full-page moment that interrupts the skip flow every 5th skip, shown to every Skppr user regardless of what categories they've selected. It's more interruptive, so it works best for sites with broad appeal.</div>
+          <div class="faq-a">Spotlight means your site appears in the normal skip flow — just more often, and across more categories. Takeover is a different format entirely: a full-page moment that interrupts the skip flow every 5th skip, shown to every Skppr user regardless of what categories they've selected. It's more interruptive, so it works best for sites with broad appeal.</div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ── CTA Band ── -->
-  <div style="padding: 0 0 0 0;">
+  <!-- CTA Band -->
+  <div>
     <div class="cta-band container">
       <h2>Your site deserves to be found.</h2>
       <p>Join the Skppr index and reach curious humans who are actively looking for something new.</p>
       <div class="cta-band-btns">
-        <a href="#pricing" class="btn btn-dark">See Listing Options ↑</a>
+        <a href="#apply" class="btn btn-dark">Apply to Get Listed</a>
         <a href="mailto:hello@tryskppr.com" class="btn" style="background:#fff; color:var(--purple);">Ask Us a Question</a>
       </div>
     </div>
   </div>
 
-  <!-- ── Footer ── -->
+  <!-- Footer -->
   <footer>
     <div class="footer-inner">
       <a href="index.html" class="logo">
@@ -900,12 +882,12 @@
           btn.textContent = 'Submit for Review →';
           alert('Something went wrong. Please email hello@tryskppr.com directly.');
         });
-    };function toggleFaq(btn) {
+    };
+
+    function toggleFaq(btn) {
       const item = btn.closest('.faq-item');
       const isOpen = item.classList.contains('open');
-      // Close all
       document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-      // Open this one if it wasn't already open
       if (!isOpen) item.classList.add('open');
     }
   </script>
