@@ -855,7 +855,52 @@
   </footer>
 
   <script>
-    function toggleFaq(btn) {
+    document.getElementById('publisherForm').onsubmit = function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      var form = e.target;
+      var rawUrl = form.url.value.trim();
+      if (rawUrl && !/^https?:\/\//i.test(rawUrl)) rawUrl = 'https://' + rawUrl;
+      try { new URL(rawUrl); } catch(_) {
+        alert('Please enter a valid website URL.');
+        btn.disabled = false;
+        btn.textContent = 'Submit for Review →';
+        return;
+      }
+
+      var data = {
+        name: form.name.value,
+        email: form.email.value,
+        url: rawUrl,
+        siteName: form.siteName.value,
+        category: form.category.value,
+        tier: form.tier.value,
+        description: form.description.value
+      };
+
+      fetch('https://skppr-api.sgordon70.workers.dev/submit-publisher', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function(r) { return r.json(); })
+        .then(function(result) {
+          if (result.success) {
+            document.getElementById('formContent').style.display = 'none';
+            document.getElementById('successMsg').style.display = 'block';
+          } else {
+            btn.disabled = false;
+            btn.textContent = 'Submit for Review →';
+            alert('Something went wrong. Please email hello@tryskppr.com directly.');
+          }
+        }).catch(function() {
+          btn.disabled = false;
+          btn.textContent = 'Submit for Review →';
+          alert('Something went wrong. Please email hello@tryskppr.com directly.');
+        });
+    };function toggleFaq(btn) {
       const item = btn.closest('.faq-item');
       const isOpen = item.classList.contains('open');
       // Close all
