@@ -704,7 +704,67 @@
       </p>
     </div>
   </section>
-
+<!-- ── Get Listed Form ── -->
+  <section id="apply">
+    <div class="container" style="max-width:680px;">
+      <div class="section-header">
+        <p class="section-label">Apply</p>
+        <h2 class="section-title">Tell us about your site</h2>
+        <p class="section-sub">We review every submission within 48 hours. Nothing is charged until you're approved.</p>
+      </div>
+      <div id="formContent" style="background:var(--bg2); border:1px solid var(--border); border-radius:20px; padding:32px;">
+        <form id="publisherForm">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+            <div>
+              <label style="display:block; font-size:13px; font-weight:600; color:var(--text-sec); margin-bottom:6px;">Your name</label>
+              <input type="text" name="name" required style="width:100%; background:var(--bg); border:1px solid var(--border); border-radius:10px; color:var(--text); padding:12px 14px; font-family:'Inter',sans-serif; font-size:15px;" />
+            </div>
+            <div>
+              <label style="display:block; font-size:13px; font-weight:600; color:var(--text-sec); margin-bottom:6px;">Email</label>
+              <input type="email" name="email" required style="width:100%; background:var(--bg); border:1px solid var(--border); border-radius:10px; color:var(--text); padding:12px 14px; font-family:'Inter',sans-serif; font-size:15px;" />
+            </div>
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block; font-size:13px; font-weight:600; color:var(--text-sec); margin-bottom:6px;">Website URL</label>
+            <input type="text" name="url" required placeholder="yoursite.com" style="width:100%; background:var(--bg); border:1px solid var(--border); border-radius:10px; color:var(--text); padding:12px 14px; font-family:'Inter',sans-serif; font-size:15px;" />
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block; font-size:13px; font-weight:600; color:var(--text-sec); margin-bottom:6px;">Site name</label>
+            <input type="text" name="siteName" required style="width:100%; background:var(--bg); border:1px solid var(--border); border-radius:10px; color:var(--text); padding:12px 14px; font-family:'Inter',sans-serif; font-size:15px;" />
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+            <div>
+              <label style="display:block; font-size:13px; font-weight:600; color:var(--text-sec); margin-bottom:6px;">Category</label>
+              <select name="category" required style="width:100%; background:var(--bg); border:1px solid var(--border); border-radius:10px; color:var(--text); padding:12px 14px; font-family:'Inter',sans-serif; font-size:15px;">
+                <option value="" disabled selected>Select one</option>
+                <option>Tech</option><option>Science</option><option>Design</option><option>Art</option><option>Music</option><option>Film</option><option>Gaming</option><option>Food</option><option>Travel</option><option>Nature</option><option>Space</option><option>History</option><option>Psychology</option><option>Philosophy</option><option>Business</option><option>Weird</option><option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block; font-size:13px; font-weight:600; color:var(--text-sec); margin-bottom:6px;">Plan</label>
+              <select name="tier" id="tierSelect" required style="width:100%; background:var(--bg); border:1px solid var(--border); border-radius:10px; color:var(--text); padding:12px 14px; font-family:'Inter',sans-serif; font-size:15px;">
+                <option value="" disabled selected>Select plan</option>
+                <option value="Standard">Standard — $199/year</option>
+                <option value="Spotlight">Spotlight — $499/year</option>
+                <option value="Takeover">Takeover — $999/year</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-bottom:20px;">
+            <label style="display:block; font-size:13px; font-weight:600; color:var(--text-sec); margin-bottom:6px;">Tell us about your site</label>
+            <textarea name="description" required style="width:100%; min-height:90px; background:var(--bg); border:1px solid var(--border); border-radius:10px; color:var(--text); padding:12px 14px; font-family:'Inter',sans-serif; font-size:15px; resize:vertical;"></textarea>
+          </div>
+          <button type="submit" id="submitBtn" class="btn btn-primary" style="width:100%; justify-content:center;">Submit for Review →</button>
+          <p style="text-align:center; font-size:13px; color:var(--text-sec); margin-top:12px;">Nothing is charged today. We'll send an invoice after approval.</p>
+        </form>
+      </div>
+      <div id="successMsg" style="display:none; text-align:center; padding:48px 0;">
+        <div style="font-size:48px; margin-bottom:16px;">🎉</div>
+        <h3 style="font-size:22px; font-weight:700; margin-bottom:8px;">You're in the queue.</h3>
+        <p style="color:var(--text-sec); font-size:15px; line-height:1.6;">We'll review your site and send an invoice within 48 hours if approved.</p>
+      </div>
+    </div>
+  </section>
   <!-- ── FAQ ── -->
   <section id="faq">
     <div class="container">
