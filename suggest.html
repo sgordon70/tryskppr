@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suggest a Site — Skppr</title>
+  <meta name="description" content="Found something great on the web? Suggest it for the Skppr index. Free, no account needed." />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz4KICA8cmVjdCB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCcgcng9JzIyJyBmaWxsPScjNkM2M0ZGJy8+CiAgPHRleHQgeD0nNTAnIHk9JzY1JyBmb250LWZhbWlseT0nQXJpYWwgQmxhY2ssIEFyaWFsJyBmb250LXdlaWdodD0nOTAwJyBmb250LXNpemU9JzQ2JyBmaWxsPSd3aGl0ZScgdGV4dC1hbmNob3I9J21pZGRsZSc+U2s8L3RleHQ+CiAgPGNpcmNsZSBjeD0nNjcnIGN5PSc2OCcgcj0nMTAnIGZpbGw9JyMyRUNDNzEnLz4KPC9zdmc+" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #1A1A2E;
+      --bg2:        #16213E;
+      --purple:     #6C63FF;
+      --purple-d:   #5A52E0;
+      --green:      #2ECC71;
+      --text:       #FFFFFF;
+      --text-sec:   #A0A8C0;
+      --border:     #2A2A4A;
+      --radius-btn: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 14px 28px;
+      border-radius: var(--radius-btn);
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .btn:hover { transform: scale(1.03); }
+    .btn-primary { background: var(--purple); color: #fff; }
+    .btn-primary:hover { box-shadow: 0 0 18px rgba(108,99,255,0.55); }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-wordmark {
+      font-weight: 700;
+      font-size: 22px;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(26, 26, 46, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .page {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      background: rgba(46,204,113,0.1);
+      border: 1px solid rgba(46,204,113,0.25);
+      border-radius: 999px;
+      padding: 6px 14px;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: clamp(28px, 5vw, 40px);
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .sub {
+      font-size: 17px;
+      color: var(--text-sec);
+      margin-bottom: 48px;
+      line-height: 1.65;
+    }
+
+    .form-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .field { margin-bottom: 16px; }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sec);
+      margin-bottom: 6px;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      padding: 12px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .field input:focus,
+    .field select:focus { border-color: var(--purple); }
+    .field input::placeholder { color: var(--text-sec); opacity: 0.6; }
+
+    .field select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A0A8C0' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+    .field select option { background: var(--bg2); }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .form-note {
+      font-size: 13px;
+      color: var(--text-sec);
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 48px 0;
+    }
+    .success-msg.show { display: block; }
+    .success-icon { font-size: 48px; margin-bottom: 16px; }
+    .success-msg h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .success-msg p { color: var(--text-sec); font-size: 15px; line-height: 1.6; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      margin-top: 80px;
+    }
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-copy { font-size: 13px; color: var(--text-sec); }
+    .footer-email { font-size: 13px; color: var(--text-sec); transition: color 0.15s; }
+    .footer-email:hover { color: var(--purple); }
+
+    @media (max-width: 580px) {
+      .page { padding: 48px 20px; }
+      .form-card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="height:36px;width:36px;flex-shrink:0;">
+          <rect width="100" height="100" rx="22" fill="#6C63FF"/>
+          <text x="50" y="65" font-family="Arial Black, Arial" font-weight="900" font-size="46" fill="white" text-anchor="middle">Sk</text>
+          <circle cx="67" cy="68" r="10" fill="#2ECC71"/>
+        </svg>
+        <span class="logo-wordmark">Skppr</span>
+      </a>
+      <a href="index.html" style="font-size:14px; color:var(--text-sec);">← Back to Skppr</a>
+    </div>
+  </nav>
+
+  <!-- Page -->
+  <div class="page">
+    <span class="eyebrow">✦ Community</span>
+    <h1>Found something great?</h1>
+    <p class="sub">If you've stumbled on a site worth sharing, tell us about it. We review every suggestion and add the good ones to the Skppr index — free, no account needed.</p>
+
+    <div class="form-card">
+      <div id="formContent">
+        <form id="suggestForm">
+          <div class="field">
+            <label>Website URL</label>
+            <input type="text" name="url" required placeholder="yourfavoritesite.com" />
+          </div>
+          <div class="field">
+            <label>Site name</label>
+            <input type="text" name="siteName" placeholder="What's it called?" />
+          </div>
+          <div class="field">
+            <label>Best category</label>
+            <select name="category">
+              <option value="" disabled selected>Select one</option>
+              <option>Tech</option><option>Science</option><option>Design</option><option>Art</option><option>Music</option><option>Film</option><option>Gaming</option><option>Food</option><option>Travel</option><option>Nature</option><option>Space</option><option>History</option><option>Psychology</option><option>Philosophy</option><option>Business</option><option>Weird</option><option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Your email <span style="font-weight:400; color:var(--text-sec);">(optional — only if you want a reply)</span></label>
+            <input type="email" name="email" placeholder="you@example.com" />
+          </div>
+          <button type="submit" id="submitBtn" class="btn btn-primary submit-btn">Suggest this site →</button>
+          <p class="form-note">No guarantees — we review every suggestion and add the ones that are a good fit. Nothing is charged.</p>
+        </form>
+      </div>
+
+      <div class="success-msg" id="successMsg">
+        <div class="success-icon">🙌</div>
+        <h3>Got it, thanks.</h3>
+        <p>We'll take a look. If it's a good fit for Skppr, it'll show up in the index within a few days.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="height:28px;width:28px;flex-shrink:0;">
+          <rect width="100" height="100" rx="22" fill="#6C63FF"/>
+          <text x="50" y="65" font-family="Arial Black, Arial" font-weight="900" font-size="46" fill="white" text-anchor="middle">Sk</text>
+          <circle cx="67" cy="68" r="10" fill="#2ECC71"/>
+        </svg>
+        <span class="logo-wordmark" style="font-size:18px;">Skppr</span>
+      </a>
+      <p class="footer-copy">© 2026 Skppr. All rights reserved.</p>
+      <a href="mailto:hello@tryskppr.com" class="footer-email">hello@tryskppr.com</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('suggestForm').onsubmit = function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      var form = e.target;
+      var rawUrl = form.url.value.trim();
+      if (rawUrl && !/^https?:\/\//i.test(rawUrl)) rawUrl = 'https://' + rawUrl;
+      try { new URL(rawUrl); } catch(_) {
+        alert('Please enter a valid website URL.');
+        btn.disabled = false;
+        btn.textContent = 'Suggest this site →';
+        return;
+      }
+
+      var data = {
+        url: rawUrl,
+        siteName: form.siteName.value,
+        category: form.category.value,
+        email: form.email.value
+      };
+
+      fetch('https://skppr-api.sgordon70.workers.dev/suggest-site', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function(r) { return r.json(); })
+        .then(function(result) {
+          if (result.success) {
+            document.getElementById('formContent').style.display = 'none';
+            document.getElementById('successMsg').classList.add('show');
+          } else {
+            btn.disabled = false;
+            btn.textContent = 'Suggest this site →';
+            alert('Something went wrong. Please email hello@tryskppr.com directly.');
+          }
+        }).catch(function() {
+          btn.disabled = false;
+          btn.textContent = 'Suggest this site →';
+          alert('Something went wrong. Please email hello@tryskppr.com directly.');
+        });
+    };
+  </script>
+
+</body>
+</html>
